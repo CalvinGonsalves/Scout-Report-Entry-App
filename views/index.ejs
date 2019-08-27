@@ -1,1 +1,10 @@
-Middle
+<h2>Players</h2>
+<div>
+    <% players.forEach(player => { %>
+    <div>
+        <img height="150" width="100" src="<%= player.playerImagePath %>">
+        <span><%= player.position %></span>
+        <span><%= player.name %></span>
+    </div>
+    <% }) %>
+</div>

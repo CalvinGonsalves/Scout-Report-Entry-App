@@ -33,7 +33,7 @@ router.post('/', async (req,res) => {
     })
     try {
         const newTeam = await team.save()
-        // res.redirect(`authors/${newTeam.id}`)
+        // res.redirect(`teams/${newTeam.id}`)
         res.redirect(`teams`)
     } catch {
         res.render('teams/new', {

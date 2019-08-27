@@ -1,0 +1,44 @@
+<div>
+    <label>Player Name</label>
+    <input type="text" name="name" value="<%= player.name %>">
+</div>
+
+
+<div>
+    <label>Team</label>
+    <select name="team">
+    <% teams.forEach( team =>{ %>
+        <% if (team.id === player.team) { %>
+            <option selected label="<%= team.name %>" value="<%= team.id %>">
+        <% } else { %>
+            <option  label="<%= team.name %>" value="<%= team.id %>">
+        <% } %>
+    <% }) %>
+    </select>
+</div>
+
+<div>
+    <label>Position</label>
+    <select name="position">
+        <option value="RHP">Right-handed Pitcher</option>
+        <option value="LHP">Left-handed Pitcher</option>
+    </select>
+</div>
+
+<div>
+<label>Date of Birth</label>
+<input type="date" name="dob"
+         value="<%= player.dob == null ? '' : 
+         player.dob.toISOString().split('T')[0] %>">
+</div>
+
+<div>
+    <label>Image</label>
+    <input type="file" name="plimage">
+
+</div>
+
+<div>
+    <label>Description</label>
+    <textarea  name="description"><%= player.description %></textarea>
+</div>

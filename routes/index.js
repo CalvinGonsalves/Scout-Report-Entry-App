@@ -1,8 +1,14 @@
 const express = require('express')
 const router = express.Router()
-
-router.get('/', (req, res) => {
-    res.render('index');
+const Player = require('../models/player')
+router.get('/', async (req, res) => {
+    let players
+    try {
+        players = await Player.find().sort({ createdAt: 'desc'}).exec()
+    } catch {
+        players =[]
+    }
+    res.render('index', { players: players});
 })
 
 module.exports = router
