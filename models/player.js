@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-const path = require('path')
-const playerImageBasePath = 'uploads/playerImages'
 
 const playerSchema = new mongoose.Schema({
     name: {
@@ -25,6 +23,10 @@ const playerSchema = new mongoose.Schema({
         default: Date.now
     },
     playerImage: {
+        type: Buffer,
+        required: true
+    },
+    playerImageType: {
         type: String,
         required: true
     },
@@ -38,10 +40,10 @@ const playerSchema = new mongoose.Schema({
 })
 
 playerSchema.virtual('playerImagePath').get(function() {
-    if (this.playerImage != null) {
-        return path.join('/', playerImageBasePath, this.playerImage)
+    if (this.playerImage != null && this.playerImageType != null) {
+        return `data: ${this.coverImageType}; charset=utf-8;base64,
+        ${this.playerImage.toString('base64')}`
     }
 })
 
 module.exports = mongoose.model('Player', playerSchema)
-module.exports.playerImageBasePath = playerImageBasePath
