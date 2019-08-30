@@ -1,0 +1,13 @@
+<h2><%= team.name %></h2>
+
+<% if (playersInTeam.length > 0) {%>
+    <h2>Players</h2>
+     <% playersInTeam.forEach(player => { %>
+    <div>
+        <img height="150" width="100" src="<%= player.playerImagePath %>">
+        <span><%= player.position %></span>
+        <span><%= player.name %></span>
+    </div>
+    <% }) %>
+
+<% } %>

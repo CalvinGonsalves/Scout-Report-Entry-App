@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Team = require('../models/team')
+const Player = require('../models/player')
 
 // All Teams Route
 router.get('/', async (req, res) => {
@@ -33,8 +34,8 @@ router.post('/', async (req,res) => {
     })
     try {
         const newTeam = await team.save()
-        // res.redirect(`teams/${newTeam.id}`)
-        res.redirect(`teams`)
+        res.redirect(`teams/${newTeam.id}`)
+        // res.redirect(`teams`)
     } catch {
         res.render('teams/new', {
             team: team,
@@ -43,6 +44,24 @@ router.post('/', async (req,res) => {
     }
     
 })
+
+router.get('/:id', async (req,res) => {
+    try {
+        const team = await Team.findById(req.params.id)
+        const players = await Player.find({ team: team.id }).exec()
+        res.render('teams/show', {
+            team: team,
+            playersInTeam: players
+        })
+
+    } catch  {
+        console.log(e)
+        res.redirect('/')
+    }
+
+})
+
+
 
 
 module.exports = router
