@@ -9,8 +9,8 @@
 <div> Description: <%= player.description %> </div>
 
 <a href="/players/<%= player.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm', { url: `/players/
-        ${player.id}` }) %>
+<%- include('../partials/deleteForm', { url: `/players/${player.id}` }) %>
+
 <a href="/teams/<%= player.team.id %>">View Team</a>
 
 
