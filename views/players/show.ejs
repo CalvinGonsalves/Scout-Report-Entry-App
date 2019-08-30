@@ -1,0 +1,18 @@
+<h2><%= player.name %></h2>
+
+<img width="100"  height ="150" src="<%= player.playerImagePath %>">
+
+<div> Team: <%= player.team.name %> </div>
+<div> DOB: <%= player.dob.toDateString() %> </div>
+<div> Age: <%= new Date().getFullYear() - player.dob.getFullYear()  %>
+<div> Position: <%= player.position %> </div>
+<div> Description: <%= player.description %> </div>
+
+<a href="/players/<%= player.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm', { url: `/players/
+        ${player.id}` }) %>
+<a href="/teams/<%= player.team.id %>">View Team</a>
+
+
+
+

@@ -13,7 +13,9 @@
 <div>
     <% players.forEach(player => { %>
     <div>
+        <a href="/players/<%= player.id %>">
         <img height="150" width="100" src="<%= player.playerImagePath %>">
+        </a>
         <span><%= player.position %></span>
         <span><%= player.name %></span>
     </div>

@@ -4,9 +4,11 @@
     <h2>Players</h2>
      <% playersInTeam.forEach(player => { %>
     <div>
-        <img height="150" width="100" src="<%= player.playerImagePath %>">
-        <span><%= player.position %></span>
-        <span><%= player.name %></span>
+        <a href="/players/<%= player.id %>">
+            <img height="150" width="100" src="<%= player.playerImagePath %>">
+            <span><%= player.position %></span>
+            <span><%= player.name %></span>
+        </a>
     </div>
     <% }) %>
 

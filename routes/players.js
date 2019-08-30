@@ -56,8 +56,7 @@ router.post('/',  async (req,res) => {
 
    try {
         const newPlayer = await player.save()
-        // res.redirect(`players/${newPlayer.id}`)
-        res.redirect(`players`)
+        res.redirect(`players/${newPlayer.id}`)
 
    } catch {
         // if (player.playerImage != null) {
@@ -69,13 +68,95 @@ router.post('/',  async (req,res) => {
    }
 })
 
-// function removePlayerImage(fileName) {
-//     fs.unlink(path.join(uploadPath, fileName), err => {
-//         if (err) console.error(err)
-//     })
-// }
+//Show player route
+router.get('/:id', async (req, res) => {
+     try {
+        const player = await Player.findById(req.params.id).populate('team').exec()
+        res.render('players/show', { player: player })
+    } catch  {
+        
+         res.redirect('/')
+     }
+})
+
+// Edit Player Route
+router.get('/:id/edit', async (req,res) => {
+    try {
+        const player = await Player.findById(req.params.id)
+        renderEditPage(res, player)
+
+    } catch {
+        res.redirect('/')
+    }
+})
+
+
+// Update Player Route
+router.put('/:id',  async (req,res) => {
+
+       let player 
+    
+       try {
+            player = await Player.findById(req.params.id)
+            player.name = req.body.name
+            player.team = req.body.team
+            player.position = req.body.position
+            player.dob = new Date(req.body.dob)
+            player.description = req.body.description
+
+            if ( req.body.plimage != null && req.body.plimage !== '') {
+                saveImage(player, req.body.plimage)
+            }
+            await player.save()
+            res.redirect(`/players/${player.id}`)
+    
+       } catch (e){
+
+        // console.log(e)
+            if (player != null){
+
+                renderEditPage(res, player, true) 
+
+            }else {
+                redirect('/')
+            }
+    
+       }
+    })
+
+//Delete player 
+router.delete('/:id', async (req,res) => {
+    let player
+    
+    try {
+        player = await Player.findById(req.params.id)
+        await player.remove()
+        res.redirect('/players')
+    } catch (e) {
+        console.log(e)
+        if (player != null) {
+            res.render('players/show', {
+                player : player,
+                errorMessage: 'Could not delete player'
+            })
+        } else {
+            res.redirect('/')
+        }
+
+
+    }
+})    
 
 async function renderNewPage(res, player, hasError = false) {
+    renderFormPage(res, player, 'new', hasError)
+
+}
+///
+async function renderEditPage(res, player, hasError = false) {
+   renderFormPage(res, player, 'edit', hasError)
+}
+///
+async function renderFormPage(res, player, form,  hasError = false) {
     try {
         const teams = await Team.find({})
         const params = {
@@ -83,12 +164,27 @@ async function renderNewPage(res, player, hasError = false) {
             player: player
         }
 
-        if (hasError) params.errorMessage = 'Error Creating Player'
-        res.render('players/new', params)
+        if (hasError) {
+            if (form === 'edit') {
+                params.errorMessage = 'Error Updating Book'
+            } else {
+                params.errorMessage = 'Error Creating Player'
+            }
+        }
+
+        
+        res.render(`players/${form}`, params)
     } catch {
         res.redirect('/players')
     }
 }
+
+// function removePlayerImage(fileName) {
+//     fs.unlink(path.join(uploadPath, fileName), err => {
+//         if (err) console.error(err)
+//     })
+// }
+
 
 
 function saveImage(player, plimageEncoded) {
