@@ -1,18 +1,64 @@
 <h2 class="page-header"><%= player.name %></h2>
+<div class="player-details">
+    <div>
+        <img class="player-image" src="<%= player.playerImagePath %>">
+        <div class="player-details-btn-grid">
+            <a class='btn btn-primary' href="/players/<%= player.id %>/edit">Edit</a>
+            <%- include('../partials/deleteForm', { url: `/players/${player.id}` }) %>
+            <a class='btn btn-primary view-team-btn' href="/teams/<%= player.team.id %>">View Team</a>
+        </div>
+    </div>
 
-<img width="100"  height ="150" src="<%= player.playerImagePath %>">
+    <div class="player-details-grid">
+        <div class="player-details-label">Team: </div>
+        <div><%= player.team.name %></div>
+        <div class="player-details-label">DOB: </div>
+        <div><%= player.dob.toDateString() %></div>
+        <div class="player-details-label">Age: </div>
+        <div><%= new Date().getFullYear() - player.dob.getFullYear() %></div>
+        <div class="player-details-label">Position: </div>
+        <div> <%= player.position %></div>
 
-<div> Team: <%= player.team.name %> </div>
-<div> DOB: <%= player.dob.toDateString() %> </div>
-<div> Age: <%= new Date().getFullYear() - player.dob.getFullYear()  %>
-<div> Position: <%= player.position %> </div>
-<div> Description: <%= player.description %> </div>
+       
+        <% if(player.hitting != null ) { %>
+         <div class="player-details-label">Scouting Grades (Position): </div>
+           <div>Hitting: <%= player.hitting %> | Power: <%= player.power %> | Running: <%= player.running %> | Fielding: <%= player.fielding %> | Throwing: <%= player.throwing %> | 
+           Overall: <%= Math.round(Math.round((player.throwing + player.power + player.running +  player.fielding + player.throwing)/5)/5)*5 %></div>
+        <% } %>
 
-<a class='btn btn-primary' href="/players/<%= player.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm', { url: `/players/${player.id}` }) %>
+        <% if(player.fastball != null ) { %>
+         <div class="player-details-label">Scouting Grades (Pitcher): </div>
+           <div>Fastball: <%= player.fastball %>  
+           <% if (player.slider != null)    {%>
+               | Slider: <%= player.slider %> 
+                <% } %>
+            <% if (player.curveball != null)    {%>
+               | Curveball: <%= player.curveball %> 
+                <% } %>
+            <% if (player.changeup != null)    {%>
+               | Changeup: <%= player.changeup %> 
+                <% } %>
+            <% if (player.cutter != null)    {%>
+               | Cutter: <%= player.cutter %> 
+                <% } %>
+            <% if (player.splitter != null)    {%>
+               | Splitter: <%= player.splitter %> 
+                <% } %>   
+            <% if (player.control != null)    {%>
+               | Control: <%= player.control %> 
+                <% } %>                 
+                | Overall: <%= player.pitcherOverall %> 
+           </div>
+        <% } %>
 
-<a class='btn btn-primary' href="/teams/<%= player.team.id %>">View Team</a>
-
+        <div class="player-details-label">Description: </div>
+        <div><%= player.description %></div>
+        
+    </div>
+    
+    
+    
+</div>
 
 
 

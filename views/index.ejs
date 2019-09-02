@@ -1,15 +1,22 @@
 <h2 class="page-header">Players</h2>
 
 <div>
-    <% players.forEach(player => { %>
+   
     
-    <div>
-        <a href="/players/<%= player.id %>">
-        <img height="150" width="100" src="<%= player.playerImagePath %>">
+    <% players.forEach( (player,index) => { %>
+    
+        <div class='card'>
+            <a href="/players/<%= player.id %>">
+                <img  src="<%= player.playerImagePath %>" style="width:100%">
+            
+             <div class="container1">
+                <h4 class='caption'><%= player.name %></h4>
+                <p class='caption'><%= player.position %></p>
+             </div>
+        </div>
+        </a>
         
-        <span><%= player.position %></span>
-        <span><%= player.name %></span>
-       </a>
-    </div>  
+       
     <% }) %>
+   
 </div>

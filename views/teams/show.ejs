@@ -3,13 +3,16 @@
 <% if (playersInTeam.length > 0) {%>
     <h2>Players</h2>
      <% playersInTeam.forEach(player => { %>
-    <div>
-        <a href="/players/<%= player.id %>">
-            <img height="150" width="100" src="<%= player.playerImagePath %>">
-            <span><%= player.position %></span>
-            <span><%= player.name %></span>
+    <div class='card'>
+            <a href="/players/<%= player.id %>">
+                <img  src="<%= player.playerImagePath %>" style="width:100%">
+            
+             <div class="container1">
+                <h4 class='caption'><%= player.name %></h4>
+                <p class='caption'><%= player.position %></p>
+             </div>
+        </div>
         </a>
-    </div>
     <% }) %>
 
 <% } %>

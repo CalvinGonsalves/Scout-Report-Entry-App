@@ -15,6 +15,53 @@ const playerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    hitting: {
+        type: Number
+    },
+    power: {
+        type: Number
+    },
+    running: {
+        type: Number
+    },
+    fielding: {
+        type: Number
+    },
+    throwing: {
+        type: Number
+    },
+    fastball: {
+        type: Number,
+        default: null
+    },
+    slider: {
+        type: Number,
+        default: null
+    },
+    curveball: {
+        type: Number,
+        default: null
+    },
+    changeup: {
+        type: Number,
+        default: null
+    },
+    cutter: {
+        type: Number,
+        default: null
+    },
+    splitter: {
+        type: Number,
+        default: null
+    },
+    control: {
+        type: Number,
+        default: null
+    },
+    pitcherOverall: {
+        type: Number
+    },
+
     dob: {
         type: Date,
         required: true

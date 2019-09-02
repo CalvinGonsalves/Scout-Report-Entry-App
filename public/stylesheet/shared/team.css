@@ -1,0 +1,9 @@
+.team-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.team-name {
+    font-size: 1.5rem;
+}

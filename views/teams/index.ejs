@@ -1,13 +1,23 @@
 <h2 class="page-header">Search Team</h2>
 <form action="/teams" method="GET">
-    <label>Name</label>
-    <input type="text" name="name" value="<%= searchOptions.name %>">
-    <button type="submit">Search</button>
+    <div class="form-row">
+        <div class="form-item">
+            <label>Name</label>
+            <input type="text" name="name" value="<%= searchOptions.name %>">
+        </div>
+    </div>
+    <div class="form-row form-row-end">
+
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
 </form>
 <br>
 <% teams.forEach(team => { %>
-    <div><%= team.name %></div>
-    <div class="btn-row">
-    <a class='btn btn-primary' href="/teams/<%= team.id %>">View</a>
+    <div class="team-row">
+        <div class="team-name"><%= team.name %></div>
+            <div class="btn-row">
+                <a class='btn btn-primary' href="/teams/<%= team.id %>">View</a>
+            </div>
+    
     </div>
 <% }) %>

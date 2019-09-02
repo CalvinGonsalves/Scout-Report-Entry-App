@@ -48,9 +48,35 @@ router.post('/',  async (req,res) => {
        team: req.body.team,
        position: req.body.position,
        dob: new Date(req.body.dob),
-    //    playerImage: fileName,
+       hitting: req.body.hitting,
+       power: req.body.power,
+       running: req.body.running,
+       fielding: req.body.fielding,
+       throwing: req.body.throwing,
+       fastball: req.body.fastball,
+       slider: req.body.slider,
+       curveball: req.body.curveball,
+       changeup: req.body.changeup,
+       cutter: req.body.cutter,
+       splitter: req.body.splitter,
+       control: req.body.control,
        description: req.body.description
    })
+
+   let sum=0;
+            let i=0;
+        let over = [player.fastball,player.slider,player.curveball,player.changeup,player.cutter,player.splitter,player.control]   
+    for (let t=0; t< over.length; t++) {
+        if (over[t] != null) {
+            sum += (over[t]);
+            i++;
+        }
+           
+    }
+        let overall = Math.round(Math.round((sum)/i)/5)*5
+        console.log(overall);
+
+        player.pitcherOverall = overall;
 
    saveImage(player, req.body.plimage)
 
@@ -95,14 +121,42 @@ router.get('/:id/edit', async (req,res) => {
 router.put('/:id',  async (req,res) => {
 
        let player 
+       
     
        try {
             player = await Player.findById(req.params.id)
             player.name = req.body.name
             player.team = req.body.team
             player.position = req.body.position
+            player.hitting = req.body.hitting
+            player.power = req.body.power
+            player.running = req.body.running
+            player.fielding = req.body.fielding
+            player.throwing = req.body.throwing
+            player.fastball = req.body.fastball
+            player.slider = req.body.slider
+            player.curveball = req.body.curveball
+            player.changeup = req.body.changeup
+            player.cutter = req.body.cutter
+            player.splitter = req.body.splitter
+            player.control = req.body.control
             player.dob = new Date(req.body.dob)
             player.description = req.body.description
+
+            let sum=0;
+            let i=0;
+        let over = [player.fastball,player.slider,player.curveball,player.changeup,player.cutter,player.splitter,player.control]   
+    for (let t=0; t< over.length; t++) {
+        if (over[t] != null) {
+            sum += (over[t]);
+            i++;
+        }
+           
+    }
+        let overall = Math.round(Math.round((sum)/i)/5)*5
+        console.log(overall);
+
+        player.pitcherOverall = overall;
 
             if ( req.body.plimage != null && req.body.plimage !== '') {
                 saveImage(player, req.body.plimage)
@@ -112,7 +166,7 @@ router.put('/:id',  async (req,res) => {
     
        } catch (e){
 
-        // console.log(e)
+        console.log(e)
             if (player != null){
 
                 renderEditPage(res, player, true) 

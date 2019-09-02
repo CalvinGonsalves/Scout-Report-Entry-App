@@ -1,0 +1,51 @@
+:root {
+    --player-image-width: 200px;
+    --player-image-width-large: 350px;
+    --player-image-aspect-ratio: 0.75;
+}
+
+
+.player-image {
+    width: var(--player-image-width);
+    height: calc(var(--player-image-width) / var(--player-image-aspect-ratio));
+}
+
+.player-details {
+    display:flex;
+    
+}
+
+.player-details > div {
+    margin: 5px;
+}
+
+.player-details-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.player-details-grid {
+    display: grid;
+    align-content: flex-start;
+    align-items: center;
+    grid-gap: 1rem;
+    grid-template-columns:  auto auto;
+}
+
+.player-details-btn-grid {
+    display: grid;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    grid-template-areas: 
+        "edit delete"
+        "team team";
+    grid-gap: .5rem;
+    margin-top: .5rem;
+}
+
+.view-team-btn {
+    grid-area: team;
+    justify-self: stretch;
+}
