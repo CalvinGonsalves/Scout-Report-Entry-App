@@ -1,44 +1,55 @@
-<div>
-    <label>Player Name</label>
-    <input type="text" name="name" value="<%= player.name %>">
+<div class="form-row">
+    <div class="form-item">
+        <label>Player Name</label>
+        <input type="text" name="name" value="<%= player.name %>">
+
+    </div>
+    <div class="form-item">
+            <label>Team</label>
+        <select name="team">
+        <% teams.forEach( team =>{ %>
+            <% if (team.id === player.team) { %>
+                <option selected label="<%= team.name %>" value="<%= team.id %>">
+            <% } else { %>
+                <option  label="<%= team.name %>" value="<%= team.id %>">
+            <% } %>
+        <% }) %>
+        </select>
+    </div>
+
+</div>
+<div class="form-row">
+    <div class="form-item">
+        <label>Position</label>
+            <select name="position">
+                <option value="RHP">Right-handed Pitcher</option>
+                <option value="LHP">Left-handed Pitcher</option>
+            </select>
+
+    </div>
+
+    <div class="form-item">
+        <label>Date of Birth</label>
+        <input type="date" name="dob"
+                value="<%= player.dob == null ? '' : 
+                player.dob.toISOString().split('T')[0] %>">
+        </div>
 </div>
 
 
-<div>
-    <label>Team</label>
-    <select name="team">
-    <% teams.forEach( team =>{ %>
-        <% if (team.id === player.team) { %>
-            <option selected label="<%= team.name %>" value="<%= team.id %>">
-        <% } else { %>
-            <option  label="<%= team.name %>" value="<%= team.id %>">
-        <% } %>
-    <% }) %>
-    </select>
-</div>
 
-<div>
-    <label>Position</label>
-    <select name="position">
-        <option value="RHP">Right-handed Pitcher</option>
-        <option value="LHP">Left-handed Pitcher</option>
-    </select>
-</div>
+<div class="form-row">
+    <div class="form-item form-item-no-grow">
+         <label>Image</label>
+        <input type="file" name="plimage" class="filepond">
+    </div>
 
-<div>
-<label>Date of Birth</label>
-<input type="date" name="dob"
-         value="<%= player.dob == null ? '' : 
-         player.dob.toISOString().split('T')[0] %>">
-</div>
-
-<div>
-    <label>Image</label>
-    <input type="file" name="plimage" class="filepond">
-
-</div>
-
-<div>
+    <div class="form-item">
     <label>Description</label>
     <textarea  name="description"><%= player.description %></textarea>
+    </div>
+
 </div>
+
+
+

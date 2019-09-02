@@ -1,13 +1,15 @@
-<h2>Players</h2>
+<h2 class="page-header">Players</h2>
+
 <div>
     <% players.forEach(player => { %>
-    <div>
-    <a href="/players/<%= player.id %>">
-        <img height="150" width="100" src="<%= player.playerImagePath %>">
     
+    <div>
+        <a href="/players/<%= player.id %>">
+        <img height="150" width="100" src="<%= player.playerImagePath %>">
+        
         <span><%= player.position %></span>
         <span><%= player.name %></span>
-      </a>  
-    </div>
+       </a>
+    </div>  
     <% }) %>
 </div>

@@ -2,6 +2,9 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 } 
 
+
+
+
 const express = require('express');
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
@@ -31,6 +34,9 @@ db.once('open', () => console.log('Connected to Mongoose'))
 app.use('/', indexRouter)
 app.use('/teams', teamRouter)
 app.use('/players', playerRouter)
+
+
+
 
 
 app.listen(process.env.PORT || 3000)

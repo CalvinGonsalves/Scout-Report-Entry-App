@@ -1,4 +1,4 @@
-<h2>Search Team</h2>
+<h2 class="page-header">Search Team</h2>
 <form action="/teams" method="GET">
     <label>Name</label>
     <input type="text" name="name" value="<%= searchOptions.name %>">
@@ -7,5 +7,7 @@
 <br>
 <% teams.forEach(team => { %>
     <div><%= team.name %></div>
-    <a href="/teams/<%= team.id %>">View</a>
+    <div class="btn-row">
+    <a class='btn btn-primary' href="/teams/<%= team.id %>">View</a>
+    </div>
 <% }) %>
