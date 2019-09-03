@@ -12,11 +12,13 @@
     </div>
 </form>
 <br>
-<% teams.forEach(team => { %>
+<% teams.forEach( (team,index) => { %>
     <div class="team-row">
-        <div class="team-name"><%= team.name %></div>
+        
+        
+        <div class="team-name"><img src="/teamLogos/<%= index %>.png" width="100px" height="100px"><%= team.name %></div>
             <div class="btn-row">
-                <a class='btn btn-primary' href="/teams/<%= team.id %>">View</a>
+                <a class='btn btn-primary' href="/teams/<%= team.id %>?index=<%=index%>">View</a>
             </div>
     
     </div>
