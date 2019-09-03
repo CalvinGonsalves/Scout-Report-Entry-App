@@ -73,18 +73,22 @@ router.post('/',  async (req,res) => {
         }
            
     }
+    if (i != 0) {
         let overall = Math.round(Math.round((sum)/i)/5)*5
         console.log(overall);
 
         player.pitcherOverall = overall;
-
+    } else {
+        player.pitcherOverall = null;
+    }
    saveImage(player, req.body.plimage)
 
    try {
         const newPlayer = await player.save()
         res.redirect(`players/${newPlayer.id}`)
 
-   } catch {
+   } catch(e) {
+       console.log(e);
         // if (player.playerImage != null) {
         //     removePlayerImage(player.playerImage)
 
@@ -153,10 +157,14 @@ router.put('/:id',  async (req,res) => {
         }
            
     }
+    if (i != 0) {
         let overall = Math.round(Math.round((sum)/i)/5)*5
         console.log(overall);
 
         player.pitcherOverall = overall;
+    } else {
+        player.pitcherOverall = null;
+    }
 
             if ( req.body.plimage != null && req.body.plimage !== '') {
                 saveImage(player, req.body.plimage)
@@ -220,7 +228,7 @@ async function renderFormPage(res, player, form,  hasError = false) {
 
         if (hasError) {
             if (form === 'edit') {
-                params.errorMessage = 'Error Updating Book'
+                params.errorMessage = 'Error Updating Player Detail'
             } else {
                 params.errorMessage = 'Error Creating Player'
             }
